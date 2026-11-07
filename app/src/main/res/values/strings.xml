@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SENAN AI</string>
+    <string name="accessibility_service_name">SENAN Automation</string>
+    <string name="accessibility_description">يسمح لسينان بالتفاعل مع عناصر التطبيقات لتنفيذ الأوامر التي يختارها المستخدم.</string>
+</resources>
