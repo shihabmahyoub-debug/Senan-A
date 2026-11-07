@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SENAN AI</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #080d1c;
+    color: #f3f6ff;
+}
+
+header {
+    padding: 25px 20px;
+    background: linear-gradient(135deg,#111d3b,#17102e);
+    border-bottom: 1px solid #263b68;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #51e5ff;
+    text-shadow: 0 0 15px #00bfff;
+}
+
+.subtitle {
+    color: #8999bd;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.container {
+    padding: 18px;
+}
+
+.panel {
+    background: #111a30;
+    border: 1px solid #26395f;
+    border-radius: 16px;
+    padding: 17px;
+    margin-bottom: 17px;
+    box-shadow: 0 5px 20px #0005;
+}
+
+h3 {
+    margin-top: 0;
+    color: #63ddff;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #31e6a1;
+    box-shadow: 0 0 12px #31e6a1;
+}
+
+button {
+    border: 0;
+    padding: 13px;
+    border-radius: 10px;
+    color: white;
+    background: linear-gradient(100deg,#087fae,#7044c7);
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 9px;
+}
+
+button:active {
+    opacity: .7;
+}
+
+.full {
+    width: 100%;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    margin: 7px 0;
+    border-radius: 9px;
+    border: 1px solid #30466f;
+    background: #091225;
+    color: white;
+    outline: none;
+}
+
+.app {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #25334e;
+}
+
+.app button {
+    margin: 0;
+    padding: 9px 15px;
+}
+
+.small {
+    color: #8798b9;
+    font-size: 12px;
+}
+
+#message {
+    color: #54e5c0;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #627493;
+    font-size: 11px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SENAN AI</div>
+    <div class="subtitle">SMART AUTOMATION SYSTEM</div>
+</header>
+
+<div class="container">
+
+    <div class="panel">
+        <h3>حالة سينان</h3>
+        <div class="status">
+            <span class="dot"></span>
+            <span>النظام جاهز لاستقبال الأوامر</span>
+        </div>
+        <button class="full" onclick="accessibility()">
+            تفعيل صلاحية التحكم بالتطبيقات
+        </button>
+        <div id="message">مرحباً، أنا سينان. كيف يمكنني مساعدتك؟</div>
+    </div>
+
+    <div class="panel">
+        <h3>التطبيقات المثبتة</h3>
+        <button class="full" onclick="loadApps()">
+            تحديث قائمة التطبيقات
+        </button>
+        <div id="apps" class="small">
+            اضغط تحديث لعرض التطبيقات الموجودة في هاتفك.
+        </div>
+    </div>
+
+    <div class="panel">
+        <h3>تنفيذ الأوامر</h3>
+
+        <select id="action">
+            <option value="click_text">الضغط على نص</option>
+            <option value="back">رجوع</option>
+            <option value="home">الرئيسية</option>
+            <option value="scroll_forward">تمرير للأسفل</option>
+            <option value="scroll_backward">تمرير للأعلى</option>
+            <option value="tap">الضغط على إحداثيات الشاشة</option>
+        </select>
+
+        <input id="value" placeholder="اكتب النص أو الإحداثيات X,Y">
+
+        <button class="full" onclick="executeAction()">
+            تنفيذ الأمر الآن
+        </button>
+    </div>
+
+    <div class="panel">
+        <h3>جدولة المهام</h3>
+
+        <label class="small">التنفيذ بعد (بالدقائق)</label>
+        <input id="minutes" type="number" min="1" value="60">
+
+        <label class="small">نوع المهمة</label>
+        <select id="scheduledAction">
+            <option value="click_text">الضغط على نص</option>
+            <option value="back">رجوع</option>
+            <option value="home">الرئيسية</option>
+            <option value="scroll_forward">تمرير للأسفل</option>
+            <option value="scroll_backward">تمرير للأعلى</option>
+        </select>
+
+        <input id="scheduledValue" placeholder="النص المطلوب الضغط عليه">
+
+        <button class="full" onclick="scheduleTask()">
+            حفظ المهمة المجدولة
+        </button>
+    </div>
+
+</div>
+
+<footer>
+    SENAN AI · PERSONAL AUTOMATION ASSISTANT
+</footer>
+
+<script>
+function message(text) {
+    document.getElementById("message").innerText = text;
+}
+
+function accessibility() {
+    if (window.SenanAndroid) {
+        SenanAndroid.openAccessibilitySettings();
+    } else {
+        message("خدمة أندرويد غير متاحة");
+    }
+}
+
+function loadApps() {
+    try {
+        const result = JSON.parse(
+            SenanAndroid.getInstalledApps()
+        );
+
+        const container = document.getElementById("apps");
+        container.innerHTML = "";
+
+        result.forEach(app => {
+            const row = document.createElement("div");
+            row.className = "app";
+
+            const name = document.createElement("span");
+            name.textContent = app.name;
+
+            const button = document.createElement("button");
+            button.textContent = "فتح";
+
+            button.onclick = function() {
+                const opened = SenanAndroid.openApp(
+                    app.packageName
+                );
+                message(opened ? "تم إرسال أمر فتح التطبيق" :
+                    "تعذر فتح التطبيق");
+            };
+
+            row.appendChild(name);
+            row.appendChild(button);
+            container.appendChild(row);
+        });
+
+        message("تم تحميل التطبيقات: " + result.length);
+    } catch (e) {
+        message("تعذر تحميل قائمة التطبيقات");
+    }
+}
+
+function executeAction() {
+    const action = document.getElementById("action").value;
+    const value = document.getElementById("value").value;
+
+    SenanAndroid.performAction(action, value);
+    message("تم إرسال الأمر إلى سينان");
+}
+
+function scheduleTask() {
+    const minutes = parseInt(
+        document.getElementById("minutes").value
+    );
+
+    const action = document.getElementById(
+        "scheduledAction"
+    ).value;
+
+    const value = document.getElementById(
+        "scheduledValue"
+    ).value;
+
+    if (!minutes || minutes < 1) {
+        message("أدخل مدة صحيحة");
+        return;
+    }
+
+    SenanAndroid.schedule(minutes, action, value);
+    message("تم إرسال المهمة إلى نظام الجدولة");
+}
+</script>
+
+</body>
+</html>
