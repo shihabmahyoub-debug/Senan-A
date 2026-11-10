@@ -1,297 +1,373 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eaf3ff">
 <title>SENAN AI</title>
-
 <style>
-* {
-    box-sizing: border-box;
+:root{
+  --ink:#102b5c; --muted:#526b91; --blue:#1768df; --blue2:#54a9ff;
+  --bg:#edf4ff; --card:#ffffff; --line:#d5e4fb; --shadow:0 8px 24px #315b9220;
+  --green:#16ad67; --purple:#7046df; --orange:#e78a24; --cyan:#149fbe; --pink:#d84f8d;
 }
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #080d1c;
-    color: #f3f6ff;
-}
-
-header {
-    padding: 25px 20px;
-    background: linear-gradient(135deg,#111d3b,#17102e);
-    border-bottom: 1px solid #263b68;
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    color: #51e5ff;
-    text-shadow: 0 0 15px #00bfff;
-}
-
-.subtitle {
-    color: #8999bd;
-    font-size: 12px;
-    margin-top: 8px;
-}
-
-.container {
-    padding: 18px;
-}
-
-.panel {
-    background: #111a30;
-    border: 1px solid #26395f;
-    border-radius: 16px;
-    padding: 17px;
-    margin-bottom: 17px;
-    box-shadow: 0 5px 20px #0005;
-}
-
-h3 {
-    margin-top: 0;
-    color: #63ddff;
-}
-
-.status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #31e6a1;
-    box-shadow: 0 0 12px #31e6a1;
-}
-
-button {
-    border: 0;
-    padding: 13px;
-    border-radius: 10px;
-    color: white;
-    background: linear-gradient(100deg,#087fae,#7044c7);
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 9px;
-}
-
-button:active {
-    opacity: .7;
-}
-
-.full {
-    width: 100%;
-}
-
-input, select {
-    width: 100%;
-    padding: 13px;
-    margin: 7px 0;
-    border-radius: 9px;
-    border: 1px solid #30466f;
-    background: #091225;
-    color: white;
-    outline: none;
-}
-
-.app {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 0;
-    border-bottom: 1px solid #25334e;
-}
-
-.app button {
-    margin: 0;
-    padding: 9px 15px;
-}
-
-.small {
-    color: #8798b9;
-    font-size: 12px;
-}
-
-#message {
-    color: #54e5c0;
-    font-size: 13px;
-    margin-top: 10px;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #627493;
-    font-size: 11px;
-}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:linear-gradient(180deg,#dceaff 0,#f4f8ff 36%,#eaf2ff 100%);color:var(--ink);font-family:Arial,Tahoma,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app-shell{max-width:760px;margin:0 auto;min-height:100vh;padding-bottom:104px;overflow:hidden}
+.topbar{display:flex;align-items:center;gap:12px;padding:18px 18px 12px}
+.gear{width:46px;height:46px;border:1px solid #c8dcfb;background:#fff;border-radius:16px;color:var(--blue);font-size:22px;box-shadow:var(--shadow)}
+.brand{flex:1;text-align:center;font-weight:900;font-size:29px;letter-spacing:1px;color:#14366e;line-height:1.05}
+.brand small{display:block;font-size:13px;font-weight:600;letter-spacing:0;color:#4288d5;margin-top:5px}
+.online{display:flex;align-items:center;gap:7px;border:1px solid #b9e9d3;background:#effcf5;color:#13824e;border-radius:30px;padding:9px 12px;font-size:13px;font-weight:700;white-space:nowrap}
+.online i{width:9px;height:9px;border-radius:50%;background:#20c778;box-shadow:0 0 0 4px #20c77820}
+.page{display:none;padding:8px 16px 20px}.page.active{display:block}
+.hero{position:relative;display:grid;grid-template-columns:42% 58%;align-items:center;min-height:270px;padding:15px 18px;border-radius:28px;background:linear-gradient(135deg,#fff 0%,#e6f1ff 62%,#d7eaff 100%);border:1px solid #d3e4ff;box-shadow:var(--shadow);overflow:hidden}
+.hero:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:#c8e1ff55;left:-100px;top:-70px}
+.robot-wrap{position:relative;z-index:1;display:flex;justify-content:center;align-items:center}
+.robot-svg{width:100%;max-width:220px;height:auto;filter:drop-shadow(0 12px 12px #194c8a24)}
+.hero-copy{position:relative;z-index:1;text-align:right}
+.hero-copy .eyebrow{font-size:13px;color:#397dc4;font-weight:700}
+.hero-copy h1{font-size:27px;line-height:1.35;margin:8px 0;color:#12346c}
+.hero-copy p{font-size:15px;line-height:1.8;color:#405c85;margin:0}
+.motto{display:inline-flex;align-items:center;gap:7px;margin-top:13px;padding:9px 13px;border-radius:30px;background:#ffffffb8;border:1px solid #d5e5fb;color:#285b9d;font-size:13px;font-weight:700}
+.section-title{font-size:19px;margin:22px 3px 12px;color:#18396e}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feature{min-height:112px;border:1px solid #d6e4fb;border-radius:22px;padding:14px;display:flex;align-items:center;gap:11px;text-align:right;background:#fff;box-shadow:0 5px 16px #345b8d12;color:var(--ink)}
+.feature:active,.primary:active,.soft-btn:active{transform:scale(.985)}
+.feature-icon{width:54px;height:54px;flex:0 0 54px;border-radius:17px;display:grid;place-items:center;font-size:27px;background:#e8efff}
+.feature strong{display:block;font-size:16px;margin-bottom:5px}
+.feature small{display:block;color:var(--muted);font-size:12px;line-height:1.5}
+.feature.purple .feature-icon{background:#eee8ff;color:var(--purple)}
+.feature.blue .feature-icon{background:#e4f2ff;color:#1768df}
+.feature.green .feature-icon{background:#e2f8eb;color:#159657}
+.feature.orange .feature-icon{background:#fff0dc;color:#d77b19}
+.feature.cyan .feature-icon{background:#def7fb;color:#118da9}
+.feature.pink .feature-icon{background:#ffe8f1;color:#ce3d7d}
+.status-card{display:flex;align-items:center;gap:12px;margin-top:15px;padding:15px 17px;border-radius:22px;background:#fff;border:1px solid #d4e4fb;box-shadow:var(--shadow)}
+.pulse{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#e3f9ed;color:#16a45d;font-size:23px}
+.status-text{flex:1}.status-text strong{display:block;font-size:16px}.status-text small{display:block;color:var(--muted);margin-top:4px}
+.panel{margin-top:13px;padding:17px;border-radius:21px;background:#fff;border:1px solid var(--line);box-shadow:0 5px 16px #345b8d0c}
+.panel h3{margin:0 0 8px;font-size:17px}.muted{color:var(--muted);font-size:13px;line-height:1.7}
+.field{display:block;width:100%;margin:9px 0;padding:13px 14px;border:1px solid #cfdef2;border-radius:13px;background:#f8fbff;color:var(--ink);outline:none}
+.field:focus{border-color:#69a9f2;box-shadow:0 0 0 3px #69a9f220}
+.primary,.soft-btn{border:0;border-radius:13px;padding:12px 16px;font-weight:700}
+.primary{background:linear-gradient(135deg,#2679e8,#4b9bf4);color:#fff;box-shadow:0 5px 12px #2679e833}
+.soft-btn{background:#edf4ff;color:#245c9e;border:1px solid #d5e5fb}
+.danger{background:#fff0f3;color:#bd315b;border:1px solid #f4cada}
+.rowitem{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding:12px;border:1px solid #e0eaf8;background:#f9fbff;border-radius:14px}
+.rowitem strong{font-size:14px}.rowitem small{display:block;color:var(--muted);margin-top:4px}
+.row-actions{display:flex;gap:6px;flex-wrap:wrap}
+.row-actions button{padding:8px 10px;font-size:12px}
+.empty{text-align:center;color:var(--muted);padding:22px 10px;font-size:13px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.stat{padding:14px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 4px 12px #345b8d0c}
+.stat span{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:25px;color:#1b65bd;margin-top:6px}
+.progress{height:10px;background:#e5eefb;border-radius:20px;overflow:hidden;margin-top:12px}.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3c8be9,#36c68a);border-radius:20px}
+.bottom-nav{position:fixed;z-index:10;bottom:0;left:0;right:0;max-width:760px;margin:auto;display:flex;justify-content:space-around;gap:3px;padding:9px 7px calc(9px + env(safe-area-inset-bottom));background:#ffffffed;border:1px solid #d4e3f8;border-bottom:0;border-radius:22px 22px 0 0;box-shadow:0 -7px 25px #315b9218;backdrop-filter:blur(12px)}
+.bottom-nav button{flex:1;min-width:0;border:0;background:transparent;color:#60799d;border-radius:14px;padding:7px 2px;font-size:11px;font-weight:700}
+.bottom-nav button b{display:block;font-size:21px;margin-bottom:3px;font-weight:400}
+.bottom-nav button.active{color:#1768df;background:#edf5ff}
+.note{padding:11px 13px;background:#f1f7ff;border-radius:13px;color:#526b91;font-size:12px;line-height:1.7;margin-top:12px}
+@media(max-width:390px){.topbar{padding-inline:12px}.brand{font-size:25px}.online{font-size:11px;padding:8px}.hero{grid-template-columns:39% 61%;padding:12px;min-height:245px}.hero-copy h1{font-size:23px}.hero-copy p{font-size:13px}.robot-svg{max-width:160px}.feature{padding:11px;gap:8px;min-height:102px}.feature-icon{width:45px;height:45px;flex-basis:45px;font-size:23px}.feature strong{font-size:14px}.feature small{font-size:11px}}
 </style>
 </head>
-
 <body>
+<div class="app-shell">
+  <header class="topbar">
+    <button class="gear" aria-label="الإعدادات" onclick="showPage('settings')">⚙</button>
+    <div class="brand">SENAN <span style="color:#2c82e6">AI</span><small>مساعدك الذكي</small></div>
+    <div class="online"><i></i> الواجهة جاهزة</div>
+  </header>
 
-<header>
-    <div class="logo">SENAN AI</div>
-    <div class="subtitle">SMART AUTOMATION SYSTEM</div>
-</header>
-
-<div class="container">
-
-    <div class="panel">
-        <h3>حالة سينان</h3>
-        <div class="status">
-            <span class="dot"></span>
-            <span>النظام جاهز لاستقبال الأوامر</span>
+  <main>
+    <section id="home" class="page active">
+      <div class="hero">
+        <div class="robot-wrap" aria-label="روبوت سينان">
+          <svg class="robot-svg" viewBox="0 0 240 280" role="img" aria-label="روبوت SENAN">
+            <defs>
+              <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".55" stop-color="#d8e9ff"/><stop offset="1" stop-color="#8db9ee"/></linearGradient>
+              <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#54caff"/><stop offset="1" stop-color="#1762cb"/></linearGradient>
+              <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#163e77"/><stop offset="1" stop-color="#071d43"/></linearGradient>
+            </defs>
+            <ellipse cx="120" cy="265" rx="78" ry="10" fill="#7aa7df" opacity=".25"/>
+            <path d="M57 174 Q35 183 31 229 L43 258 Q51 270 72 265 L91 220Z" fill="url(#shell)" stroke="#7aa9e4" stroke-width="3"/>
+            <path d="M183 174 Q205 183 209 229 L197 258 Q189 270 168 265 L149 220Z" fill="url(#shell)" stroke="#7aa9e4" stroke-width="3"/>
+            <path d="M67 174 Q120 147 173 174 L190 250 Q120 274 50 250Z" fill="url(#shell)" stroke="#7aa9e4" stroke-width="3"/>
+            <rect x="79" y="198" width="82" height="43" rx="15" fill="url(#dark)" stroke="#65baff" stroke-width="3"/>
+            <text x="120" y="225" text-anchor="middle" font-size="17" font-weight="bold" fill="#73e4ff">SENAN</text>
+            <path d="M88 174 L91 157 L149 157 L152 174" fill="none" stroke="#367bc7" stroke-width="8" stroke-linecap="round"/>
+            <rect x="31" y="50" width="178" height="126" rx="48" fill="url(#shell)" stroke="#6ca3e4" stroke-width="4"/>
+            <rect x="43" y="66" width="154" height="94" rx="37" fill="url(#dark)" stroke="#a9d8ff" stroke-width="3"/>
+            <rect x="19" y="91" width="28" height="58" rx="13" fill="url(#blue)" stroke="#6ccfff" stroke-width="3"/>
+            <rect x="193" y="91" width="28" height="58" rx="13" fill="url(#blue)" stroke="#6ccfff" stroke-width="3"/>
+            <circle cx="33" cy="120" r="8" fill="#a2f4ff"/><circle cx="207" cy="120" r="8" fill="#a2f4ff"/>
+            <path d="M77 112 Q91 92 106 112" fill="none" stroke="#35d7ff" stroke-width="8" stroke-linecap="round"/>
+            <path d="M134 112 Q149 92 164 112" fill="none" stroke="#35d7ff" stroke-width="8" stroke-linecap="round"/>
+            <path d="M103 137 Q120 150 137 137" fill="none" stroke="#35d7ff" stroke-width="4" stroke-linecap="round"/>
+            <path d="M76 53 Q120 22 164 53" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+            <circle cx="120" cy="181" r="9" fill="#4bcfff" stroke="#fff" stroke-width="3"/>
+            <path d="M55 215 Q26 201 24 225 Q25 245 55 246 L72 234" fill="url(#shell)" stroke="#6ca3e4" stroke-width="3"/>
+            <path d="M185 215 Q214 201 216 225 Q215 245 185 246 L168 234" fill="url(#shell)" stroke="#6ca3e4" stroke-width="3"/>
+            <path d="M33 222 Q37 204 50 210 L64 224 Q70 235 58 242 Q44 248 33 235Z" fill="url(#shell)" stroke="#6ca3e4" stroke-width="2"/>
+          </svg>
         </div>
-        <button class="full" onclick="accessibility()">
-            تفعيل صلاحية التحكم بالتطبيقات
-        </button>
-        <div id="message">مرحباً، أنا سينان. كيف يمكنني مساعدتك؟</div>
-    </div>
-
-    <div class="panel">
-        <h3>التطبيقات المثبتة</h3>
-        <button class="full" onclick="loadApps()">
-            تحديث قائمة التطبيقات
-        </button>
-        <div id="apps" class="small">
-            اضغط تحديث لعرض التطبيقات الموجودة في هاتفك.
+        <div class="hero-copy">
+          <div class="eyebrow">مرحباً بك</div>
+          <h1>أنا سينان</h1>
+          <p>مساعدك الذكي لإدارة مهام الهاتف وتنظيم تطبيقاتك بسهولة.</p>
+          <div class="motto">💙 معاً نحو مستقبل أذكى</div>
         </div>
-    </div>
+      </div>
 
-    <div class="panel">
-        <h3>تنفيذ الأوامر</h3>
+      <h2 class="section-title">مركز التحكم</h2>
+      <div class="feature-grid">
+        <button class="feature purple" onclick="showPage('apps')"><span class="feature-icon">▦</span><span><strong>التطبيقات</strong><small>إدارة تطبيقاتك</small></span></button>
+        <button class="feature blue" onclick="showPage('tasks')"><span class="feature-icon">☷</span><span><strong>المهام</strong><small>تنظيم قائمة المهام</small></span></button>
+        <button class="feature green" onclick="showPage('schedule')"><span class="feature-icon">▦</span><span><strong>الجدولة</strong><small>مواعيد المهام</small></span></button>
+        <button class="feature orange" onclick="showPage('memory')"><span class="feature-icon">♧</span><span><strong>الذاكرة</strong><small>حفظ بياناتك محلياً</small></span></button>
+        <button class="feature cyan" onclick="showPage('reports')"><span class="feature-icon">▥</span><span><strong>الإحصائيات</strong><small>متابعة الأداء</small></span></button>
+        <button class="feature pink" onclick="showPage('settings')"><span class="feature-icon">♙</span><span><strong>الأمان</strong><small>إعدادات التطبيق</small></span></button>
+      </div>
+      <div class="status-card"><div class="pulse">✓</div><div class="status-text"><strong>الواجهة جاهزة للعمل</strong><small>يمكنك إدارة التطبيقات والمهام المحفوظة</small></div><span style="color:#198b56;font-weight:800">SENAN</span></div>
+    </section>
 
-        <select id="action">
-            <option value="click_text">الضغط على نص</option>
-            <option value="back">رجوع</option>
-            <option value="home">الرئيسية</option>
-            <option value="scroll_forward">تمرير للأسفل</option>
-            <option value="scroll_backward">تمرير للأعلى</option>
-            <option value="tap">الضغط على إحداثيات الشاشة</option>
-        </select>
+    <section id="apps" class="page">
+      <h2 class="section-title">📱 التطبيقات</h2>
+      <div class="panel">
+        <h3>التطبيقات المثبتة</h3><p class="muted">اعرض التطبيقات التي يسمح Android لـ SENAN برؤيتها.</p>
+        <button class="primary" onclick="refreshInstalledApps()">فحص التطبيقات المثبتة</button>
+        <p id="nativeAppsStatus" class="muted">لم يتم الفحص بعد.</p><div id="nativeAppsList"></div>
+      </div>
+      <div class="panel">
+        <h3>إضافة اسم تطبيق</h3><input id="appName" class="field" placeholder="اكتب اسم التطبيق">
+        <button class="soft-btn" onclick="addApp()">＋ إضافة</button>
+      </div>
+      <div class="panel"><h3>قائمة التطبيقات المختارة</h3><div id="appsList"></div></div>
+    </section>
 
-        <input id="value" placeholder="اكتب النص أو الإحداثيات X,Y">
+    <section id="tasks" class="page">
+      <h2 class="section-title">☷ المهام</h2>
+      <div class="panel"><h3>إنشاء مهمة</h3>
+        <input id="taskName" class="field" placeholder="مثال: فتح تطبيق التعدين">
+        <select id="taskApp" class="field"><option value="">اختر التطبيق (اختياري)</option></select>
+        <button class="primary" onclick="addTask()">＋ إنشاء المهمة</button>
+      </div>
+      <div class="panel"><h3>قائمة المهام</h3><div id="tasksList"></div></div>
+    </section>
 
-        <button class="full" onclick="executeAction()">
-            تنفيذ الأمر الآن
-        </button>
-    </div>
+    <section id="schedule" class="page">
+      <h2 class="section-title">◷ الجدولة</h2>
+      <div class="panel"><h3>حفظ موعد لمهمة</h3>
+        <select id="scheduleTask" class="field"><option value="">اختر المهمة</option></select>
+        <input id="taskTime" type="time" class="field">
+        <button class="primary" onclick="saveSchedule()">حفظ الموعد</button>
+        <div class="note">تنبيه: هذه النسخة تحفظ الموعد داخل التطبيق فقط. لا تشغّل المهمة تلقائياً في الخلفية بعد.</div>
+      </div>
+      <div class="panel"><h3>المواعيد المحفوظة</h3><div id="scheduleList"></div></div>
+    </section>
 
-    <div class="panel">
-        <h3>جدولة المهام</h3>
+    <section id="memory" class="page">
+      <h2 class="section-title">♧ الذاكرة المحلية</h2>
+      <div class="panel"><h3>ذاكرة SENAN</h3><p class="muted">يتم حفظ أسماء التطبيقات والمهام والمواعيد وسجل النشاط على هذا الهاتف باستخدام تخزين WebView المحلي.</p>
+        <div class="stats"><div class="stat"><span>التطبيقات</span><strong id="memoryApps">0</strong></div><div class="stat"><span>المهام</span><strong id="memoryTasks">0</strong></div></div>
+      </div>
+      <div class="panel"><h3>تنبيه الخصوصية</h3><p class="muted">لا تحفظ كلمات المرور أو البيانات المالية في هذه الذاكرة التجريبية.</p></div>
+    </section>
 
-        <label class="small">التنفيذ بعد (بالدقائق)</label>
-        <input id="minutes" type="number" min="1" value="60">
+    <section id="reports" class="page">
+      <h2 class="section-title">▥ الإحصائيات</h2>
+      <div class="stats">
+        <div class="stat"><span>التطبيقات المختارة</span><strong id="appsCount">0</strong></div>
+        <div class="stat"><span>إجمالي المهام</span><strong id="tasksCount">0</strong></div>
+        <div class="stat"><span>المهام المكتملة</span><strong id="doneCount">0</strong></div>
+        <div class="stat"><span>نسبة الإنجاز</span><strong id="progressText">0%</strong></div>
+      </div>
+      <div class="panel"><h3>التقدم</h3><div class="progress"><i id="progressBar"></i></div><p class="muted" id="lastActivity">لا توجد عمليات بعد.</p></div>
+      <div class="panel"><h3>سجل العمليات</h3><div id="logList"></div><button class="soft-btn danger" onclick="clearLogs()">مسح السجل</button></div>
+    </section>
 
-        <label class="small">نوع المهمة</label>
-        <select id="scheduledAction">
-            <option value="click_text">الضغط على نص</option>
-            <option value="back">رجوع</option>
-            <option value="home">الرئيسية</option>
-            <option value="scroll_forward">تمرير للأسفل</option>
-            <option value="scroll_backward">تمرير للأعلى</option>
-        </select>
-
-        <input id="scheduledValue" placeholder="النص المطلوب الضغط عليه">
-
-        <button class="full" onclick="scheduleTask()">
-            حفظ المهمة المجدولة
-        </button>
-    </div>
-
+    <section id="settings" class="page">
+      <h2 class="section-title">⚙ الإعدادات</h2>
+      <div class="panel"><h3>SENAN AI</h3><p class="muted">واجهة تجريبية محلية — الإصدار 1.1</p><p class="muted">لا توجد في هذه النسخة خدمة تنفيذ تلقائي أو جدولة تعمل بالخلفية.</p></div>
+      <div class="panel"><h3>حالة الربط مع Android</h3><p class="muted" id="bridgeStatus">جارٍ التحقق من الربط…</p></div>
+    </section>
+  </main>
 </div>
 
-<footer>
-    SENAN AI · PERSONAL AUTOMATION ASSISTANT
-</footer>
+<nav class="bottom-nav" aria-label="التنقل الرئيسي">
+  <button class="active" data-page="home" onclick="showPage('home')"><b>⌂</b>الرئيسية</button>
+  <button data-page="apps" onclick="showPage('apps')"><b>▦</b>التطبيقات</button>
+  <button data-page="tasks" onclick="showPage('tasks')"><b>☷</b>المهام</button>
+  <button data-page="reports" onclick="showPage('reports')"><b>▥</b>التقارير</button>
+  <button data-page="settings" onclick="showPage('settings')"><b>☰</b>المزيد</button>
+</nav>
 
 <script>
-function message(text) {
-    document.getElementById("message").innerText = text;
+"use strict";
+const readStore = (key, fallback) => {
+  try { const value = JSON.parse(localStorage.getItem(key)); return value ?? fallback; }
+  catch (_) { return fallback; }
+};
+let apps = readStore("senanApps", []);
+let tasks = readStore("senanTasks", []);
+let logs = readStore("senanLogs", []);
+let schedules = readStore("senanSchedules", []);
+let nativeApps = [];
+let selectedPackages = readStore("senanSelectedPackages", {});
+
+function save(){
+  localStorage.setItem("senanApps", JSON.stringify(apps));
+  localStorage.setItem("senanTasks", JSON.stringify(tasks));
+  localStorage.setItem("senanLogs", JSON.stringify(logs));
+  localStorage.setItem("senanSchedules", JSON.stringify(schedules));
+  localStorage.setItem("senanSelectedPackages", JSON.stringify(selectedPackages));
 }
-
-function accessibility() {
-    if (window.SenanAndroid) {
-        SenanAndroid.openAccessibilitySettings();
-    } else {
-        message("خدمة أندرويد غير متاحة");
-    }
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
+  document.querySelectorAll(".bottom-nav button").forEach(b => b.classList.toggle("active", b.dataset.page === id));
+  render();
+  if(id === "apps" && nativeApps.length) renderNativeApps();
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-
-function loadApps() {
-    try {
-        const result = JSON.parse(
-            SenanAndroid.getInstalledApps()
-        );
-
-        const container = document.getElementById("apps");
-        container.innerHTML = "";
-
-        result.forEach(app => {
-            const row = document.createElement("div");
-            row.className = "app";
-
-            const name = document.createElement("span");
-            name.textContent = app.name;
-
-            const button = document.createElement("button");
-            button.textContent = "فتح";
-
-            button.onclick = function() {
-                const opened = SenanAndroid.openApp(
-                    app.packageName
-                );
-                message(opened ? "تم إرسال أمر فتح التطبيق" :
-                    "تعذر فتح التطبيق");
-            };
-
-            row.appendChild(name);
-            row.appendChild(button);
-            container.appendChild(row);
-        });
-
-        message("تم تحميل التطبيقات: " + result.length);
-    } catch (e) {
-        message("تعذر تحميل قائمة التطبيقات");
-    }
+function addLog(message){
+  logs.unshift(new Date().toLocaleTimeString("ar") + " — " + message);
+  logs = logs.slice(0,100); save(); render();
 }
-
-function executeAction() {
-    const action = document.getElementById("action").value;
-    const value = document.getElementById("value").value;
-
-    SenanAndroid.performAction(action, value);
-    message("تم إرسال الأمر إلى سينان");
+function addApp(){
+  const input = document.getElementById("appName");
+  const name = input.value.trim();
+  if(!name) return alert("اكتب اسم التطبيق أولاً.");
+  if(apps.includes(name)) return alert("هذا التطبيق موجود بالفعل.");
+  apps.push(name); input.value = ""; save(); addLog("إضافة التطبيق: " + name);
 }
-
-function scheduleTask() {
-    const minutes = parseInt(
-        document.getElementById("minutes").value
-    );
-
-    const action = document.getElementById(
-        "scheduledAction"
-    ).value;
-
-    const value = document.getElementById(
-        "scheduledValue"
-    ).value;
-
-    if (!minutes || minutes < 1) {
-        message("أدخل مدة صحيحة");
-        return;
-    }
-
-    SenanAndroid.schedule(minutes, action, value);
-    message("تم إرسال المهمة إلى نظام الجدولة");
+function removeApp(index){
+  const name = apps[index]; apps.splice(index,1); save(); addLog("حذف التطبيق: " + name);
 }
+function addTask(){
+  const nameInput = document.getElementById("taskName");
+  const name = nameInput.value.trim();
+  const app = document.getElementById("taskApp").value;
+  if(!name) return alert("اكتب اسم المهمة أولاً.");
+  tasks.push({name, app, done:false}); nameInput.value = ""; save(); addLog("إنشاء مهمة: " + name);
+}
+function completeTask(index){
+  tasks[index].done = !tasks[index].done; save();
+  addLog((tasks[index].done ? "إكمال: " : "إعادة فتح: ") + tasks[index].name);
+}
+function removeTask(index){
+  const name = tasks[index].name; tasks.splice(index,1);
+  schedules = schedules.filter(item => item.task !== name);
+  save(); addLog("حذف المهمة: " + name);
+}
+function saveSchedule(){
+  const index = document.getElementById("scheduleTask").value;
+  const time = document.getElementById("taskTime").value;
+  if(index === "" || !time) return alert("اختر المهمة والوقت.");
+  schedules.push({task:tasks[Number(index)].name,time}); save();
+  document.getElementById("taskTime").value = ""; addLog("حفظ موعد: " + time);
+}
+function removeSchedule(index){ schedules.splice(index,1); save(); addLog("حذف موعد محفوظ."); }
+function clearLogs(){
+  if(confirm("هل تريد مسح سجل العمليات؟")){ logs=[]; save(); render(); }
+}
+function refreshInstalledApps(){
+  const status = document.getElementById("nativeAppsStatus");
+  if(!window.SenanAndroid || typeof window.SenanAndroid.getInstalledApps !== "function"){
+    status.textContent = "ربط Android غير متاح في هذه المعاينة. افتح النسخة المثبتة من SENAN.";
+    document.getElementById("nativeAppsList").replaceChildren(); return;
+  }
+  try{
+    nativeApps = JSON.parse(window.SenanAndroid.getInstalledApps() || "[]");
+    status.textContent = "تم العثور على " + nativeApps.length + " تطبيق قابل للتشغيل.";
+    renderNativeApps();
+  }catch(error){ status.textContent = "تعذر قراءة التطبيقات."; }
+}
+function renderNativeApps(){
+  const list = document.getElementById("nativeAppsList"); list.replaceChildren();
+  if(!nativeApps.length){ list.innerHTML = '<div class="empty">لم يتم العثور على تطبيقات قابلة للتشغيل.</div>'; return; }
+  nativeApps.forEach(app => {
+    const row = document.createElement("div"); row.className = "rowitem";
+    const info = document.createElement("div"); const name = document.createElement("strong");
+    name.textContent = app.name; const pkg = document.createElement("small"); pkg.textContent = app.packageName;
+    info.append(name,pkg);
+    const actions = document.createElement("div"); actions.className = "row-actions";
+    const choose = document.createElement("button"); choose.className = "soft-btn";
+    choose.textContent = selectedPackages[app.packageName] ? "✓ محدد" : "＋ اختيار";
+    choose.onclick = () => toggleNativeSelection(app.packageName);
+    const open = document.createElement("button"); open.className = "primary"; open.textContent = "فتح";
+    open.onclick = () => launchNativeApp(app.packageName);
+    actions.append(choose,open); row.append(info,actions); list.append(row);
+  });
+}
+function toggleNativeSelection(packageName){
+  const found = nativeApps.find(app => app.packageName === packageName);
+  const name = found ? found.name : packageName;
+  if(selectedPackages[packageName]){
+    delete selectedPackages[packageName]; apps = apps.filter(item => item !== name);
+    addLog("إزالة التطبيق: " + name);
+  }else{
+    selectedPackages[packageName] = name;
+    if(!apps.includes(name)) apps.push(name);
+    addLog("اختيار التطبيق: " + name);
+  }
+  save(); renderNativeApps(); render();
+}
+function launchNativeApp(packageName){
+  if(!window.SenanAndroid || typeof window.SenanAndroid.openApp !== "function"){
+    alert("فتح التطبيقات متاح من نسخة Android المثبتة فقط."); return;
+  }
+  const result = window.SenanAndroid.openApp(packageName);
+  if(result === "OK") addLog("طلب فتح التطبيق: " + (selectedPackages[packageName] || packageName));
+  else alert("تعذر فتح التطبيق. تحقق من أن التطبيق قابل للتشغيل.");
+}
+function makeRow(title, subtitle, buttons){
+  const row = document.createElement("div"); row.className = "rowitem";
+  const info = document.createElement("div"); const strong = document.createElement("strong");
+  strong.textContent = title; info.append(strong);
+  if(subtitle){ const small=document.createElement("small"); small.textContent=subtitle; info.append(small); }
+  const actions=document.createElement("div"); actions.className="row-actions";
+  buttons.forEach(item=>{const button=document.createElement("button");button.className=item.className;button.textContent=item.label;button.onclick=item.onClick;actions.append(button);});
+  row.append(info,actions); return row;
+}
+function fillList(id, emptyText, rows){
+  const target=document.getElementById(id); target.replaceChildren();
+  if(!rows.length){const empty=document.createElement("div");empty.className="empty";empty.textContent=emptyText;target.append(empty);}
+  else rows.forEach(row=>target.append(row));
+}
+function render(){
+  const done=tasks.filter(task=>task.done).length;
+  const percent=tasks.length ? Math.round(done/tasks.length*100) : 0;
+  const setText=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+  setText("appsCount",apps.length);setText("tasksCount",tasks.length);setText("doneCount",done);
+  setText("progressText",percent+"%");setText("memoryApps",apps.length);setText("memoryTasks",tasks.length);
+  setText("lastActivity",logs[0] || "لا توجد عمليات بعد.");
+  document.getElementById("progressBar").style.width=percent+"%";
+  fillList("appsList","لا توجد تطبيقات مضافة.",apps.map((name,index)=>makeRow(name,"تطبيق محفوظ محلياً",[
+    {label:"حذف",className:"soft-btn danger",onClick:()=>removeApp(index)}
+  ])));
+  const taskSelect=document.getElementById("taskApp"); const oldApp=taskSelect.value;
+  taskSelect.replaceChildren(new Option("اختر التطبيق (اختياري)",""));
+  apps.forEach(name=>taskSelect.add(new Option(name,name)));
+  if(apps.includes(oldApp))taskSelect.value=oldApp;
+  fillList("tasksList","لا توجد مهام بعد.",tasks.map((task,index)=>makeRow(task.name,task.app || "غير مرتبط بتطبيق",[
+    {label:task.done?"تراجع":"إنجاز",className:"soft-btn",onClick:()=>completeTask(index)},
+    {label:"حذف",className:"soft-btn danger",onClick:()=>removeTask(index)}
+  ])));
+  const scheduleSelect=document.getElementById("scheduleTask"); const oldTask=scheduleSelect.value;
+  scheduleSelect.replaceChildren(new Option("اختر المهمة",""));
+  tasks.forEach((task,index)=>scheduleSelect.add(new Option(task.name,String(index))));
+  if(oldTask !== "" && Number(oldTask)<tasks.length)scheduleSelect.value=oldTask;
+  fillList("scheduleList","لا توجد مواعيد محفوظة.",schedules.map((item,index)=>makeRow(item.time,item.task,[
+    {label:"حذف",className:"soft-btn danger",onClick:()=>removeSchedule(index)}
+  ])));
+  fillList("logList","لا يوجد سجل بعد.",logs.map(item=>{const row=document.createElement("div");row.className="rowitem";row.textContent=item;return row;}));
+  const bridge=document.getElementById("bridgeStatus");
+  if(bridge)bridge.textContent=(window.SenanAndroid && typeof window.SenanAndroid.getInstalledApps==="function")
+    ?"تم العثور على جسر Android الخاص بـ SENAN.":"جسر Android غير متاح في هذه المعاينة.";
+}
+render();
 </script>
-
 </body>
 </html>
