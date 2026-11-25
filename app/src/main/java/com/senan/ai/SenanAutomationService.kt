@@ -27,9 +27,27 @@ class SenanAutomationService : AccessibilityService() {
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        // يستقبل أحداث التطبيقات عند تفعيل الخدمة
+    val root = rootInActiveWindow ?: return
+    scanScreen(root)
+}
+
+private fun scanScreen(node: AccessibilityNodeInfo) {
+    val text = node.text?.toString() ?: ""
+    val description = node.contentDescription?.toString() ?: ""
+
+    if (text.isNotBlank() || description.isNotBlank()) {
+        android.util.Log.d(
+            "SENAN_SCAN",
+            "Text: $text | Description: $description"
+        )
     }
 
+    for (i in 0 until node.childCount) {
+        val child = node.getChild(i) ?: continue
+        scanScreen(child)
+        child.recycle()
+    }
+}
     override fun onInterrupt() {
         // إيقاف التفاعل عند مقاطعة الخدمة
     }
