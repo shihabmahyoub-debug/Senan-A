@@ -224,11 +224,22 @@ function save(){
   localStorage.setItem("senanSchedules", JSON.stringify(schedules));
   localStorage.setItem("senanSelectedPackages", JSON.stringify(selectedPackages));
 }
+
 function showPage(id){
-  document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
-  document.querySelectorAll(".bottom-nav button").forEach(b => b.classList.toggle("active", b.dataset.page === id));
+  document.querySelectorAll(".page").forEach(p =>
+    p.classList.toggle("active", p.id === id)
+  );
+
+  document.querySelectorAll(".bottom-nav button").forEach(b =>
+    b.classList.toggle("active", b.dataset.page === id)
+  );
+
   render();
-  if(id === "apps" && nativeApps.length) renderNativeApps();
+
+  if (id === "apps" || id === "tasks") {
+    refreshInstalledApps();
+  }
+
   window.scrollTo({top:0,behavior:"smooth"});
 }
 function addLog(message){
