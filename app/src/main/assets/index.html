@@ -163,8 +163,14 @@ button{cursor:pointer}
         <button class="primary" onclick="addTask()">＋ إنشاء المهمة</button>
       </div>
       <div class="panel"><h3>قائمة المهام</h3><div id="tasksList"></div></div>
+<div class="panel">
+  <h3>🧠 ذكاء SENAN</h3>
+  <button class="primary" onclick="scanCurrentScreen()">
+    🔍 فحص الشاشة
+  </button>
+  <p id="scanResult" class="muted">بانتظار الفحص...</p>
+</div>
     </section>
-
     <section id="schedule" class="page">
       <h2 class="section-title">◷ الجدولة</h2>
       <div class="panel"><h3>حفظ موعد لمهمة</h3>
@@ -175,6 +181,7 @@ button{cursor:pointer}
       </div>
       <div class="panel"><h3>المواعيد المحفوظة</h3><div id="scheduleList"></div></div>
     </section>
+    
 
     <section id="memory" class="page">
       <h2 class="section-title">♧ الذاكرة المحلية</h2>
