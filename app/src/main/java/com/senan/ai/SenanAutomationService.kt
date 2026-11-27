@@ -82,7 +82,12 @@ private fun scanScreen(node: AccessibilityNodeInfo) {
                     AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
                 )
             }
-
+"scan" -> {
+    val root = rootInActiveWindow
+    if (root != null) {
+        scanScreen(root)
+    }
+}
             "tap" -> {
                 val parts = value.split(",")
                 if (parts.size == 2) {
